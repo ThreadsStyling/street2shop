@@ -10,5 +10,6 @@ bash get_street2shop.sh
 Download the images:
 ```
 mkdir images
-python download.py --urls photos/photos.txt
+cd images
+cat ../photos/photos.txt | sed -e 's/,/ /' | tr ' ' '\n' | parallel --bar -N2 '[ ! -e {1} ] && wget --quiet {2} -O {1}'
 ```
